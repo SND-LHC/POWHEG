@@ -1,0 +1,20 @@
+ifdef CDEBUG
+DEBUG= -g -O0
+endif
+
+LIBDIR        = ../$(OBJ)
+LIBRARY	      = $(LIBDIR)/libnlojet.a
+CODE          =  $(patsubst %.cc,%.o,$(wildcard *.cc))
+
+INCLUDE1=$(PWD)/bits
+INCLUDE2=$(PWD)/include
+
+%.o: %.cc | $(LIBDIR)
+	$(CC) $(DEBUG)  -c  -o  $(LIBDIR)/$@ $^ $(CXXFLAGS) -I. -I$(INCLUDE1) -I$(INCLUDE2)
+
+
+all: $(LIBRARY)
+
+$(LIBRARY): $(CODE)
+	cd $(LIBDIR); ar cru libnlojet.a $(CODE); ranlib libnlojet.a
+

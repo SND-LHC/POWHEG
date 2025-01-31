@@ -70,7 +70,8 @@ endif
 
 
 ## LoopTools
-LT=PathToLoopTools
+LTAPP=$(shell which lt)
+LT=$(subst bin/lt,,$(LTAPP))
 LTFLAGS=-I$(LT)/include -L$(LT)/lib64 -looptools
 LIBS+= -L$(LT)/lib64 -looptools
 
